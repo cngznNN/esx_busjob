@@ -1,4 +1,6 @@
-resource_manifest_version '44febabe-d386-4d18-afbe-5e627f4af937'
+fx_version 'adamant'
+
+game 'gta5'
 
 client_scripts {
     '@es_extended/locale.lua',
@@ -11,13 +13,11 @@ client_scripts {
 server_scripts {
     '@es_extended/locale.lua',
     'config.lua',
-	'@mysql-async/lib/MySQL.lua',
+    '@mysql-async/lib/MySQL.lua',
     'locales/en.lua',
     'locales/tr.lua',
     'server/server.lua'
 }
-
-
 
 --[[
   _____                 _                                  _   
