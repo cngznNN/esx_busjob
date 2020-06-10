@@ -1,13 +1,8 @@
-local ESX = nil
+ESX = nil
 local ped = PlayerPedId()
 local pedCoords = {}
 local pedDuty = false
-local busVehicle = nil
-local blip = nil
-local finishMarker = nil
-local finishBlip = nil
-local finalBlip = nil
-
+local busVehicle, blip, finishMarker, finishBlip, finalBlip = nil
 
 AddEventHandler('playerSpawned', function()
     Citizen.CreateThread(function()
