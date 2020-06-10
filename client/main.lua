@@ -410,7 +410,6 @@ function CreatePedForVehicle(vehicle, hash, seat)
     SetPedCombatAttributes(npc, 292, 0)
     SetCanAttackFriendly(npc, 0, 0)
 
-
     return npc
 end
 
