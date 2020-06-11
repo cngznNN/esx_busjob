@@ -60,7 +60,7 @@ Citizen.CreateThread(function ()
                     if Vdist(_v.x, _v.y, _v.z, pedCoords.x, pedCoords.y, pedCoords.z) < 5.0 then                
                         ShowPedHelpDialog(_U('finish_marker_msg'))
 
-                        if IsControlPressed(0, Keys['E']) and IsPedInBus() then
+                        if IsControlPressed(0, Keys['E']) and IsPedInSpawnBus() then
                             FinishBus()
                         end
                     end
@@ -91,7 +91,7 @@ Citizen.CreateThread(function ()
                     if Vdist(_v.x, _v.y, _v.z, pedCoords.x, pedCoords.y, pedCoords.z) < 5.0 then                
                         ShowPedHelpDialog(_U('final_marker_msg'))
 
-                        if IsControlPressed(0, Keys['E']) and IsPedInBus() then
+                        if IsControlPressed(0, Keys['E']) and IsPedInSpawnBus() then
                             CompleteJob()
                         end
                     end
@@ -451,6 +451,10 @@ function ResetSkin()
     ESX.TriggerServerCallback('esx_skin:getPlayerSkin', function(skin)
         TriggerEvent('skinchanger:loadSkin', skin)
     end)
+end
+
+function IsPedInSpawnBus()
+	return (GetVehiclePedIsIn(PlayerPedId(), false) == busVehicle)
 end
 
 function IsPedInBus()
