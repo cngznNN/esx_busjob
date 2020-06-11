@@ -107,41 +107,38 @@ end)
 Citizen.CreateThread(function()
     while true do
         Citizen.Wait(0)
+		for _, v in ipairs(Config.BusJob) do
+			for _, _v in ipairs(v.DutyPos) do
+				DrawMarker(2, _v.x, _v.y, _v.z, 0.0, 0.0, 0.0, 
+				0.0, 0.0, 0.0, 1.3, 1.3, 1.3, 
+				255, 255, 0, 200, 
+				true, false, 2, true, nil, nil, false)
 
-        if not finishMarker and not finalMarker then
-            for _, v in ipairs(Config.BusJob) do
-                for _, _v in ipairs(v.DutyPos) do
-                    DrawMarker(2, _v.x, _v.y, _v.z, 0.0, 0.0, 0.0, 
-                    0.0, 0.0, 0.0, 1.3, 1.3, 1.3, 
-                    255, 255, 0, 200, 
-                    true, false, 2, true, nil, nil, false)
+				if Vdist(_v.x, _v.y, _v.z, pedCoords.x, pedCoords.y, pedCoords.z) < 1.3 then                
+					ShowPedHelpDialog(_U('duty_help_msg'))
 
-                    if Vdist(_v.x, _v.y, _v.z, pedCoords.x, pedCoords.y, pedCoords.z) < 1.3 then                
-                        ShowPedHelpDialog(_U('duty_help_msg'))
+					if IsControlPressed(0, Keys['E']) then
+						ShowPedBusDutyMenu()
+					end
+				end
+			end
 
-                        if IsControlPressed(0, Keys['E']) then
-                            ShowPedBusDutyMenu()
-                        end
-                    end
-                end
+			if pedDuty and not busVehicle then
+				for _, _v in ipairs(v.VehicleSpawn) do
+					DrawMarker(22, _v.x, _v.y, _v.z, 0.0, 0.0, 0.0, 
+					0.0, 0.0, 0.0, 1.3, 1.3, 1.3, 
+					255, 255, 0, 200, 
+					true, false, 2, true, nil, nil, false)
 
-                if pedDuty then
-                    for _, _v in ipairs(v.VehicleSpawn) do
-                        DrawMarker(22, _v.x, _v.y, _v.z, 0.0, 0.0, 0.0, 
-                        0.0, 0.0, 0.0, 1.3, 1.3, 1.3, 
-                        255, 255, 0, 200, 
-                        true, false, 2, true, nil, nil, false)
+					if Vdist(_v.x, _v.y, _v.z, pedCoords.x, pedCoords.y, pedCoords.z) < 1.3 then                
+						ShowPedHelpDialog(_U('duty_spawn_bus_msg'))
 
-                        if Vdist(_v.x, _v.y, _v.z, pedCoords.x, pedCoords.y, pedCoords.z) < 1.3 then                
-                            ShowPedHelpDialog(_U('duty_spawn_bus_msg'))
-
-                            if IsControlPressed(0, Keys['E']) and not IsPedInBus() then
-                                SpawnBusForPed()
-                            end
-                        end
-                    end
-                end
-            end
+						if IsControlPressed(0, Keys['E']) and not IsPedInBus() then
+							SpawnBusForPed()
+						end
+					end
+				end
+			end
         end
     end
 end)
@@ -359,7 +356,12 @@ function ResetFinish()
 end
 
 function ResetDuty()
-    pedDuty = false
+	LeavePedInVehicle()
+	DeleteBus()
+    ResetFinish()
+	ResetFinal()
+	pedDuty = false
+	
 end
 
 function CheckDuty()
