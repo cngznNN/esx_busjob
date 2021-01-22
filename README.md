@@ -51,3 +51,6 @@ Rakamları siz değiştirebilirsiniz.
 • https://imgyukle.com/i/yA42qb \
 • https://imgyukle.com/i/yA4qNS \
 • https://imgyukle.com/i/yA4z8f
+
+** Added Spanish Translation
+Thanks NEIDER12 for Spanish Translation.
