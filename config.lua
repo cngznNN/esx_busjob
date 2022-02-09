@@ -14,6 +14,8 @@ Config.Blip = {
 
 Config.Price = 5000
 
+Config.Ped = true
+
 Config.BusJob = {
   {
     DutyPos = {

@@ -243,7 +243,7 @@ function SpawnBusForPed()
 end
 
 function FirstDuty()
-    return CreatePedForBus()
+    return Config.Ped and CreatePedForBus() or FinishDuty()
 end
 
 function CreatePedForBus()
